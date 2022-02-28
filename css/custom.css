@@ -4,3 +4,37 @@
 body {
     font-family: 'Ubuntu', sans-serif;
 }
+
+/* spinner */
+#spinner {
+    display: none;
+    justify-content: center;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    z-index: 9999;
+}
+
+#spinner::after {
+    content: '';
+    height: 100px;
+    width: 100px;
+    border: 10px solid transparent;
+    border-top-color: rgb(255, 202, 44);
+    border-radius: 50%;
+    animation: loading 1s linear infinite;
+}
+
+@keyframes loading {
+    to {
+        transform: rotate(1turn);
+    }
+}
+
+/* model */
+@media (min-width: 576px) {
+    .modal-dialog {
+        max-width: 70%;
+        margin: 1.75rem auto;
+    }
+}
