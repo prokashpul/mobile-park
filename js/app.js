@@ -39,6 +39,7 @@ const mobileDataDisplay = (data) => {
     // use forEach loop get search items
     if (data.data.length <= 20) {
         document.getElementById('items-number').innerText = `Search Results  ( ${data.data.length}  items Found)`;
+        spinnerToggle("none");
     } else {
         document.getElementById('items-number').innerText = `Search Results  (20 item Found)`;
     }
