@@ -22,7 +22,9 @@ const searchBtn = () => {
     const inputField = document.getElementById('search-input');
     const inputValue = inputField.value;
     if (inputValue == "") {
-        document.getElementById('items-number').innerText = `OOps!! 😭😭 Please input any phone name...`;
+        document.getElementById('items-number').innerText = `OOps!! 😭😭 Please input any Mobile name or Model...`;
+        // spinner
+        spinnerToggle("none");
     } else {
         mobileApiLoad(inputValue.toLowerCase());
     }
@@ -37,11 +39,17 @@ const mobileDataDisplay = (data) => {
     // empty display Items
     displayItems.textContent = '';
     // use forEach loop get search items
-    if (data.data.length <= 20) {
+    if (data.data.length <= 20 && data.data.length > 0) {
         document.getElementById('items-number').innerText = `Search Results  ( ${data.data.length}  items Found)`;
+        // spinner
+        spinnerToggle("none");
+    } else if (data.data.length === 0) {
+        document.getElementById('items-number').innerText = `OOps!! wrong input 😭😭 Please input any Mobile name or Model...`;
+
+        // spinner
         spinnerToggle("none");
     } else {
-        document.getElementById('items-number').innerText = `Search Results  (20 item Found)`;
+        document.getElementById('items-number').innerText = `Search Results  ( 20+  items Found)`;
     }
     data.data.slice(0, 20).forEach((mobile) => {
         const div = document.createElement('div'); //create a div element
@@ -102,7 +110,7 @@ const showSingleItem = (data) => {
                     <div class="d-flex justify-content-end">
                         <button type="button" class="btn-close m-3" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
-                    <div class="card border-0 rounded-0">
+                    <div class="card border-0 rounded-0 py-4">
                         <div class="row align-items-center">
                             <div class="col-md-6">
                                 <img src="${data.data.image?data.data.image:'img/mobile.jpg'} " class="card-img-top px-5 py-3" height="400" alt="${data.data.name?data.data.name:'no found'}">
@@ -133,4 +141,10 @@ const showSingleItem = (data) => {
                 </div>
             `
     spinnerToggle("none");
+}
+
+// page reload home click
+
+const pageReload = () => {
+    location.reload();
 }
