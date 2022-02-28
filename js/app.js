@@ -84,7 +84,7 @@ const spinnerToggle = (displayStyle) => {
 // single item api load
 const singleItem = (mobileId) => {
     const url = `https://openapi.programming-hero.com/api/phone/${mobileId}`
-    console.log(url)
+    // console.log(url)
     fetch(url)
         .then((res) => {
             // condition apply
@@ -110,12 +110,15 @@ const singleItemClick = (singleData) => {
 
 // show single in modals
 const showSingleItem = (data) => {
-    console.log(data)
+    // console.log(data)
     const singleItem = document.getElementById('single-view');
     // empty single Item
     singleItem.textContent = '';
     // singleItem inner html set
-    singleItem.innerHTML = `
+    if (data === undefined || data === null) {
+        console.log("error")
+    } else {
+        singleItem.innerHTML = `
     <div class="modal-content">
                     <div class="d-flex justify-content-end">
                         <button type="button" class="btn-close m-3" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -150,9 +153,9 @@ const showSingleItem = (data) => {
                     </div>
                 </div>
             `
-    spinnerToggle("none");
+        spinnerToggle("none");
+    }
 }
-
 
 
 // page reload home click
