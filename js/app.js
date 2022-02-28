@@ -1,5 +1,7 @@
 // load api 
 const mobileApiLoad = (inputData) => {
+
+    //api link
     const url = `https://openapi.programming-hero.com/api/phones?search=${inputData}`
     // fetch function called
     fetch(url)
@@ -25,13 +27,14 @@ const searchBtn = () => {
         document.getElementById('items-number').innerText = `OOps!! 😭😭 Please input any Mobile name or Model...`;
         // spinner
         spinnerToggle("none");
+
     } else {
         mobileApiLoad(inputValue.toLowerCase());
     }
     // input value empty
     inputField.value = '';
-
 }
+
 
 // Mobile api data load in display
 const mobileDataDisplay = (data) => {
@@ -70,10 +73,13 @@ const mobileDataDisplay = (data) => {
         spinnerToggle("none");
     })
 }
+
+
 // spinner page toggler add
 const spinnerToggle = (displayStyle) => {
     document.getElementById('spinner').style.display = displayStyle;
 }
+
 
 // single item api load
 const singleItem = (mobileId) => {
@@ -92,12 +98,16 @@ const singleItem = (mobileId) => {
             showSingleItem(singleMobileData)
         }).catch(error => document.getElementById('items-number').innerText = `OOps!! 😭😭 ${error.statusText}`)
 }
+
+
 // single item show display
 
 const singleItemClick = (singleData) => {
     spinnerToggle("flex");
     singleItem(singleData)
 }
+
+
 // show single in modals
 const showSingleItem = (data) => {
     console.log(data)
@@ -142,6 +152,8 @@ const showSingleItem = (data) => {
             `
     spinnerToggle("none");
 }
+
+
 
 // page reload home click
 
