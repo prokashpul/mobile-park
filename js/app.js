@@ -8,7 +8,7 @@ const mobileApiLoad = (inputData) => {
             if (res.status >= 200 && res.status <= 299) {
                 return res.json();
             } else {
-
+                throw Error(res.statusText);
             }
         })
         .then((mobileData) => {
@@ -43,7 +43,7 @@ const mobileDataDisplay = (data) => {
     data.data.slice(0, 20).forEach((mobile) => {
         const div = document.createElement('div'); //create a div element
         div.classList.add('col'); //add a class 
-        console.log(mobile)
+        // console.log(mobile)
         // div inner html setup
         div.innerHTML = `
         <div class="card border-0 shadow rounded h-100">
@@ -51,10 +51,34 @@ const mobileDataDisplay = (data) => {
                 <div class="card-body text-center my-3">
                   <h3 class="card-title">${mobile.phone_name?mobile.phone_name:'Not Found'}</h3>
                     <p>Brand: <em> ${mobile.brand?mobile.brand:'Not Found'}</em></p>
-                    <a class="btn btn-warning rounded-0 text-light">About More </a>
+                    <a class="btn btn-warning rounded-0 text-light" onclick="singleItemClick('${mobile.slug}')">About More </a>
              </div>
             </div>
         `
-        displayItems.appendChild(div)
+        displayItems.appendChild(div);
     })
+}
+
+
+// single item api load
+const singleItem = (mobileId) => {
+    const url = `https://openapi.programming-hero.com/api/phone/${mobileId}`
+    console.log(url)
+    fetch(url)
+        .then((res) => {
+            // condition apply
+            if (res.status >= 200 && res.status <= 299) {
+                return res.json();
+            } else {
+                throw Error(res.statusText);
+            }
+        })
+        .then((singleMobileData) => {
+            console.log(singleMobileData)
+        }).catch(error => document.getElementById('items-number').innerText = `OOps!! 😭😭 ${error.statusText}`)
+}
+// single item show display
+
+const singleItemClick = (singleData) => {
+    singleItem(singleData)
 }
