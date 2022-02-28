@@ -61,11 +61,11 @@ const mobileDataDisplay = (data) => {
         // div inner html setup
         div.innerHTML = `
         <div class="card border-0 shadow rounded h-100">
-             <img src="${mobile.image?mobile.image:'img/mobile.jpg'}" class="card-img-top px-4 pt-4" height="380" alt="${mobile.phone_name?mobile.phone_name:'Not Found'}">
+             <img src="${mobile?.image?mobile?.image:'img/mobile.jpg'}" class="card-img-top px-4 pt-4" height="380" alt="${mobile?.phone_name?mobile?.phone_name:'Not Found'}">
                 <div class="card-body text-center my-3">
-                  <h3 class="card-title">${mobile.phone_name?mobile.phone_name:'Not Found'}</h3>
-                    <p>Brand: <em> ${mobile.brand?mobile.brand:'Not Found'}</em></p>
-                    <a class="btn btn-warning rounded-0 text-light" data-bs-toggle="modal" data-bs-target="#staticBackdrop" onclick="singleItemClick('${mobile.slug}')">About More </a>
+                  <h3 class="card-title">${mobile?.phone_name?mobile?.phone_name:'Not Found'}</h3>
+                    <p>Brand: <em> ${mobile?.brand?mobile?.brand:'Not Found'}</em></p>
+                    <a class="btn btn-warning rounded-0 text-light" data-bs-toggle="modal" data-bs-target="#staticBackdrop" onclick="singleItemClick('${mobile?.slug}')">About More </a>
              </div>
             </div>
         `
@@ -106,6 +106,7 @@ const singleItemClick = (singleData) => {
     spinnerToggle("flex");
     singleItem(singleData)
 }
+// data .data convert a function
 
 
 // show single in modals
@@ -115,10 +116,7 @@ const showSingleItem = (data) => {
     // empty single Item
     singleItem.textContent = '';
     // singleItem inner html set
-    if (data === undefined || data === null) {
-        console.log("error")
-    } else {
-        singleItem.innerHTML = `
+    singleItem.innerHTML = `
     <div class="modal-content">
                     <div class="d-flex justify-content-end">
                         <button type="button" class="btn-close m-3" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -126,35 +124,34 @@ const showSingleItem = (data) => {
                     <div class="card border-0 rounded-0 py-4">
                         <div class="row align-items-center">
                             <div class="col-md-6">
-                                <img src="${data.data.image?data.data.image:'img/mobile.jpg'} " class="card-img-top px-5 py-3" height="400" alt="${data.data.name?data.data.name:'no found'}">
+                                <img src="${data?.data?.image?data?.data?.image:'img/mobile.jpg'} " class="card-img-top px-5 py-3" height="400" alt="${data?.data?.name?data?.data?.name:'no found'}">
                             </div>
                             <div class="col-md-6">
                                 <ul class="list-group list-group-flush">
-                                    <h2 class="card-title fw-bold  mx-3">${data.data.name?data.data.name:'no found'}</h2>
-                                    <li class="list-group-item"><strong>Brand : </strong> ${data.data.brand?data.data.brand:'no found'}</li>      
-                                    <li class="list-group-item">${data.data.releaseDate?data.data.releaseDate:'Released ....'}</li>
-                                    <li class="list-group-item"><strong>DisplaySize : </strong> ${data.data.mainFeatures.displaySize?data.data.mainFeatures.displaySize:'no found'}</li>   
-                                    <li class="list-group-item border-bottom"><strong>Memory : </strong> ${data.data.mainFeatures.memory?data.data.mainFeatures.memory:'no found'}</li>        
+                                    <h2 class="card-title fw-bold  mx-3">${data?.data?.name?data?.data?.name:'no found'}</h2>
+                                    <li class="list-group-item"><strong>Brand : </strong> ${data?.data?.brand?data?.data?.brand:'no found'}</li>      
+                                    <li class="list-group-item">${data.data.releaseDate?data?.data?.releaseDate:'Released ....'}</li>
+                                    <li class="list-group-item"><strong>DisplaySize : </strong> ${data?.data?.mainFeatures?.displaySize?data?.data?.mainFeatures?.displaySize:'no found'}</li>   
+                                    <li class="list-group-item border-bottom"><strong>Memory : </strong> ${data?.data?.mainFeatures.memory?data?.data?.mainFeatures?.memory:'no found'}</li>        
                                 </ul>
                             </div>
                         </div>
                         <h3 class="mx-3 fw-bold">More Details: </h3>
                         <ul class="list-group list-group-flush">
-                        <li class="list-group-item"><strong>ChipSet : </strong> ${data.data.mainFeatures.chipSet?data.data.mainFeatures.chipSet:'no found'}</li>  
-                        <li class="list-group-item"><strong>Storage : </strong> ${data.data.mainFeatures.storage?data.data.mainFeatures.storage:'no found'}</li> 
-                        <li class="list-group-item"><strong>Sensors : </strong> ${data.data.mainFeatures.sensors?data.data.mainFeatures.sensors:'no found'}</li> 
-                        <li class="list-group-item"><strong>Bluetooth : </strong> ${data.data.others.Bluetooth?data.data.others.Bluetooth:'no found'}</li> 
-                        <li class="list-group-item"><strong>GPS : </strong> ${data.data.others.GPS?data.data.others.GPS:'...'}</li> 
-                        <li class="list-group-item"><strong>NFC : </strong> ${data.data.others.NFC?data.data.others.NFC:'...'}</li> 
-                        <li class="list-group-item"><strong>Radio: </strong> ${data.data.others.Radio?data.data.others.Radio:'...'}</li> 
-                        <li class="list-group-item"><strong>USB: </strong> ${data.data.others.USB?data.data.others.USB:'...'}</li> 
-                        <li class="list-group-item"><strong>USB: </strong> ${data.data.others.WLAN?data.data.others.WLAN:'...'}</li> 
+                        <li class="list-group-item"><strong>ChipSet : </strong> ${data?.data?.mainFeatures?.chipSet?data?.data?.mainFeatures?.chipSet:'no found'}</li>  
+                        <li class="list-group-item"><strong>Storage : </strong> ${data?.data?.mainFeatures?.storage?data?.data?.mainFeatures?.storage:'no found'}</li> 
+                        <li class="list-group-item"><strong>Sensors : </strong> ${data?.data?.mainFeatures?.sensors?data?.data?.mainFeatures?.sensors:'no found'}</li> 
+                        <li class="list-group-item"><strong>Bluetooth : </strong> ${data?.data?.others?.Bluetooth?data.data?.others?.Bluetooth:'no found'}</li> 
+                        <li class="list-group-item"><strong>GPS : </strong> ${data?.data?.others?.GPS?data?.data?.others?.GPS:'not Found'}</li> 
+                        <li class="list-group-item"><strong>NFC : </strong> ${data?.data?.others?.NFC?data?.data?.others?.NFC:'not Found'}</li> 
+                        <li class="list-group-item"><strong>Radio: </strong> ${data?.data?.others?.Radio?data?.data?.others?.Radio:'not Found'}</li> 
+                        <li class="list-group-item"><strong>USB: </strong> ${data?.data?.others?.USB?data?.data?.others?.USB:'not Found'}</li> 
+                        <li class="list-group-item"><strong>USB: </strong> ${data?.data?.others?.WLAN?data?.data?.others?.WLAN:'not Found'}</li> 
                         </ul>
                     </div>
                 </div>
             `
-        spinnerToggle("none");
-    }
+    spinnerToggle("none");
 }
 
 
