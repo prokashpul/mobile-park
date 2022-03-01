@@ -130,7 +130,7 @@ const singleItemClick = (singleData) => {
 
 // show single in modals
 const showSingleItem = (data) => {
-    console.log(data)
+    // console.log(data)
     const singleItem = document.getElementById('single-view');
     // empty single Item
     singleItem.textContent = '';
