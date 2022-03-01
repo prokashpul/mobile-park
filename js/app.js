@@ -25,10 +25,14 @@ const fetchData = (urlLink, loadData) => {
         })
 }
 
+
+
 // search mobile load api 
 const mobileApiLoad = (inputData) => {
     fetchData(`phones?search=${inputData}`, mobileDataDisplay);
 }
+
+
 
 // search button and input field  event handel add 
 const searchBtn = () => {
@@ -36,11 +40,13 @@ const searchBtn = () => {
     spinnerToggle("flex");
     // search result display hide
     displayDataToggle('none');
-
+    document.getElementById('more-item').style.display = 'none'
+    document.getElementById('items-number').style.display = 'none'
     const inputField = document.getElementById('search-input');
     const inputValue = inputField.value;
     if (inputValue == "") {
-        document.getElementById('items-number').innerText = `OOps!! 😭😭 Please input any Mobile name or Model...`;
+        document.getElementById('items-number').innerText = `OOps!! Empty 😭😭 Please input any Mobile name ...`;
+        document.getElementById('items-number').style.display = 'block ';
         // sinner display none
         spinnerToggle("none");
 
@@ -52,25 +58,34 @@ const searchBtn = () => {
 }
 
 
+
 // Mobile api data load in display
 const mobileDataDisplay = (data) => {
     const displayItems = document.getElementById('display-items');
     // empty display Items
     displayItems.textContent = '';
     // use forEach loop get search items
+
     if (data.data.length <= 20 && data.data.length > 0) {
         document.getElementById('items-number').innerText = `Search Results  ( ${data.data.length}  items Found)`;
+        document.getElementById('items-number').style.display = 'block ';
         // spinner
         spinnerToggle("none");
     } else if (data.data.length === 0) {
-        document.getElementById('items-number').innerText = `OOps!! wrong input 😭😭 Please input any Mobile name or Model...`;
+        document.getElementById('items-number').innerText = `OOps!! search result not found 😭😭 Please Try Again...`;
+        document.getElementById('items-number').style.display = 'block ';
 
         // spinner
         spinnerToggle("none");
     } else {
-        document.getElementById('items-number').innerText = `Search Results  ( 20+  items Found)`;
+        document.getElementById('items-number').innerText = `Search Results  ( ${data.data.length}  items Found)`;
+        document.getElementById('items-number').style.display = 'block ';
     }
-    data.data.slice(0, 20).forEach((mobile) => {
+
+
+
+    // show Dispaly function
+    const showDispaly = (mobile) => {
         const div = document.createElement('div'); //create a div element
         div.classList.add('col'); //add a class 
         // console.log(mobile)
@@ -79,9 +94,11 @@ const mobileDataDisplay = (data) => {
         <div class="card border-0 shadow rounded h-100">
              <img src="${mobile?.image?mobile?.image:'img/mobile.jpg'}" class="card-img-top px-4 pt-4" height="" alt="${mobile?.phone_name?mobile?.phone_name:'Not Found'}">
                 <div class="card-body text-center my-3">
-                  <h3 class="card-title">${mobile?.phone_name?mobile?.phone_name:'Not Found'}</h3>
+                  <h4 class="card-title">${mobile?.phone_name?mobile?.phone_name:'Not Found'}</h4>
                     <p>Brand: <em> ${mobile?.brand?mobile?.brand:'Not Found'}</em></p>
-                    <a class="btn btn-warning rounded-0 text-light" data-bs-toggle="modal" data-bs-target="#staticBackdrop" onclick="singleItemClick('${mobile?.slug}')">About More </a>
+                    <div class="card-footer bg-transparent border-0">
+                    <a class="btn btn-outline-warning btn-sm" data-bs-toggle="modal" data-bs-target="#staticBackdrop" onclick="singleItemClick('${mobile?.slug}')">More Details ✈</a>
+                    </div>
              </div>
             </div>
         `
@@ -90,7 +107,25 @@ const mobileDataDisplay = (data) => {
         spinnerToggle("none");
         // search result display show
         displayDataToggle('flex');
-    })
+    }
+
+    // 1 to 20 items show dispaly & click see more button show all items
+    if (data.data.length <= 20) {
+        data.data.slice(0, 20).forEach((mobile) => {
+            showDispaly(mobile);
+        })
+    } else if (data.data.length > 20 && data.data.length !== 0 && data.data !== undefined && data.data !== null) {
+        data.data.slice(0, 20).forEach((mobile) => {
+            showDispaly(mobile);
+        })
+        data.data.slice(20).forEach((mobile) => {
+            document.getElementById('more-item').style.display = 'flex'
+            document.getElementById('see-more').addEventListener('click', () => {
+                showDispaly(mobile);
+                document.getElementById('more-item').style.display = 'none';
+            })
+        })
+    }
 }
 
 
@@ -109,10 +144,13 @@ const singlePageDataClear = (displayStyle) => {
 }
 
 
+
+
 // single item api load
 const singleItem = (mobileId) => {
     fetchData(`phone/${mobileId}`, showSingleItem);
 }
+
 
 
 // single item show display
@@ -123,9 +161,11 @@ const singleItemClick = (singleData) => {
         //spinner data display show
         spinnerToggle("flex");
         // single data load
-        singleItem(singleData)
+        singleItem(singleData);
     }
     // data .data convert a function
+
+
 
 
 // show single in modals
@@ -148,7 +188,7 @@ const showSingleItem = (data) => {
                             <div class="col-md-6">
                                 <ul class="list-group list-group-flush">
                                     <h2 class="card-title fw-bold  mx-3">${data?.data?.name?data?.data?.name:'no found'}</h2>
-                                    <li class="list-group-item">${data.data.releaseDate?data?.data?.releaseDate:'Released ---'}</li>
+                                    <li class="list-group-item">${data.data.releaseDate?data?.data?.releaseDate:'Released ....'}</li>
                                     <li class="list-group-item"><strong>Brand : </strong> ${data?.data?.brand?data?.data?.brand:'no found'}</li>                                   
                                     <li class="list-group-item"><strong>DisplaySize : </strong> ${data?.data?.mainFeatures?.displaySize?data?.data?.mainFeatures?.displaySize:'no found'}</li>   
                                     <li class="list-group-item border-bottom"><strong>Memory : </strong> ${data?.data?.mainFeatures.memory?data?.data?.mainFeatures?.memory:'no found'}</li>        
@@ -175,6 +215,7 @@ const showSingleItem = (data) => {
     // spinner data display show
     singlePageDataClear('block');
 }
+
 
 
 // page reload home click

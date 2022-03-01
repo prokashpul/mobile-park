@@ -1,11 +1,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;700&display=swap');
-
-
 body {
     font-family: 'Ubuntu', sans-serif;
 }
 
+
 /* spinner */
+
 #spinner {
     display: none;
     justify-content: center;
@@ -31,7 +31,17 @@ body {
     }
 }
 
+
+/* more items button */
+
+#more-item {
+    display: none;
+    justify-content: center;
+}
+
+
 /* model */
+
 @media (min-width: 576px) {
     .modal-dialog {
         max-width: 70%;
