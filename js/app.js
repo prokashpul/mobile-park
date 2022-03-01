@@ -1,8 +1,6 @@
-// load api 
-const mobileApiLoad = (inputData) => {
-
+const fetchData = (urlLink, loadData) => {
     //api link
-    const url = `https://openapi.programming-hero.com/api/phones?search=${inputData}`
+    const url = `https://openapi.programming-hero.com/api/${urlLink}`
     // fetch function called
     fetch(url)
         .then((res) => {
@@ -13,9 +11,16 @@ const mobileApiLoad = (inputData) => {
                 throw Error(res.statusText);
             }
         })
-        .then((mobileData) => {
-            mobileDataDisplay(mobileData)
+        .then((data) => {
+
+            loadData(data)
+
         }).catch(error => document.getElementById('items-number').innerText = `OOps!! 😭😭 ${error.statusText}`)
+}
+
+// search mobile load api 
+const mobileApiLoad = (inputData) => {
+    fetchData(`phones?search=${inputData}`, mobileDataDisplay);
 }
 
 // search button and input field  event handel add 
@@ -99,20 +104,7 @@ const singlePageDataClear = (displayStyle) => {
 
 // single item api load
 const singleItem = (mobileId) => {
-    const url = `https://openapi.programming-hero.com/api/phone/${mobileId}`
-    // console.log(url)
-    fetch(url)
-        .then((res) => {
-            // condition apply
-            if (res.status >= 200 && res.status <= 299) {
-                return res.json();
-            } else {
-                throw Error(res.statusText);
-            }
-        })
-        .then((singleMobileData) => {
-            showSingleItem(singleMobileData)
-        }).catch(error => document.getElementById('items-number').innerText = `OOps!! 😭😭 ${error.statusText}`)
+    fetchData(`phone/${mobileId}`, showSingleItem);
 }
 
 
