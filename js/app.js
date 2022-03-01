@@ -130,7 +130,7 @@ const singleItemClick = (singleData) => {
 
 // show single in modals
 const showSingleItem = (data) => {
-    // console.log(data)
+    console.log(data)
     const singleItem = document.getElementById('single-view');
     // empty single Item
     singleItem.textContent = '';
@@ -148,7 +148,7 @@ const showSingleItem = (data) => {
                             <div class="col-md-6">
                                 <ul class="list-group list-group-flush">
                                     <h2 class="card-title fw-bold  mx-3">${data?.data?.name?data?.data?.name:'no found'}</h2>
-                                    <li class="list-group-item">${data.data.releaseDate?data?.data?.releaseDate:'Released ....'}</li>
+                                    <li class="list-group-item">${data.data.releaseDate?data?.data?.releaseDate:'Released ---'}</li>
                                     <li class="list-group-item"><strong>Brand : </strong> ${data?.data?.brand?data?.data?.brand:'no found'}</li>                                   
                                     <li class="list-group-item"><strong>DisplaySize : </strong> ${data?.data?.mainFeatures?.displaySize?data?.data?.mainFeatures?.displaySize:'no found'}</li>   
                                     <li class="list-group-item border-bottom"><strong>Memory : </strong> ${data?.data?.mainFeatures.memory?data?.data?.mainFeatures?.memory:'no found'}</li>        
@@ -165,7 +165,7 @@ const showSingleItem = (data) => {
                         <li class="list-group-item"><strong>NFC : </strong> ${data?.data?.others?.NFC?data?.data?.others?.NFC:'not Found'}</li> 
                         <li class="list-group-item"><strong>Radio: </strong> ${data?.data?.others?.Radio?data?.data?.others?.Radio:'not Found'}</li> 
                         <li class="list-group-item"><strong>USB: </strong> ${data?.data?.others?.USB?data?.data?.others?.USB:'not Found'}</li> 
-                        <li class="list-group-item"><strong>USB: </strong> ${data?.data?.others?.WLAN?data?.data?.others?.WLAN:'not Found'}</li> 
+                        <li class="list-group-item"><strong>WLAN: </strong> ${data?.data?.others?.WLAN?data?.data?.others?.WLAN:'not Found'}</li> 
                         </ul>
                     </div>
                 </div>
