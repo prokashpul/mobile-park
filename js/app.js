@@ -1,7 +1,7 @@
 const fetchData = (urlLink, loadData) => {
     //api link
     const url = `https://openapi.programming-hero.com/api/${urlLink}`
-    // fetch function called
+        // fetch function called
     fetch(url)
         .then((res) => {
             // condition apply
@@ -15,7 +15,14 @@ const fetchData = (urlLink, loadData) => {
 
             loadData(data)
 
-        }).catch(error => document.getElementById('items-number').innerText = `OOps!! 😭😭 ${error.statusText}`)
+        }).catch(error => {
+            if (error.status === undefined) {
+                document.getElementById('items-number').innerText = `OOps!! 😭😭 Server Problem.  please try again`
+                spinnerToggle("none");
+            }
+
+
+        })
 }
 
 // search mobile load api 
@@ -68,9 +75,9 @@ const mobileDataDisplay = (data) => {
         div.classList.add('col'); //add a class 
         // console.log(mobile)
         // div inner html setup
-        div.innerHTML = `
+        div.innerHTML += `
         <div class="card border-0 shadow rounded h-100">
-             <img src="${mobile?.image?mobile?.image:'img/mobile.jpg'}" class="card-img-top px-4 pt-4" height="380" alt="${mobile?.phone_name?mobile?.phone_name:'Not Found'}">
+             <img src="${mobile?.image?mobile?.image:'img/mobile.jpg'}" class="card-img-top px-4 pt-4" height="" alt="${mobile?.phone_name?mobile?.phone_name:'Not Found'}">
                 <div class="card-body text-center my-3">
                   <h3 class="card-title">${mobile?.phone_name?mobile?.phone_name:'Not Found'}</h3>
                     <p>Brand: <em> ${mobile?.brand?mobile?.brand:'Not Found'}</em></p>
@@ -89,13 +96,13 @@ const mobileDataDisplay = (data) => {
 
 // spinner page toggler add
 const spinnerToggle = (displayStyle) => {
-    document.getElementById('spinner').style.display = displayStyle;
-}
-//search result toggle and previous data clear
+        document.getElementById('spinner').style.display = displayStyle;
+    }
+    //search result toggle and previous data clear
 const displayDataToggle = (displayStyle) => {
-    document.getElementById('display-items').style.display = displayStyle;
-}
-// single page data toggle 
+        document.getElementById('display-items').style.display = displayStyle;
+    }
+    // single page data toggle 
 const singlePageDataClear = (displayStyle) => {
     document.getElementById('single-view').style.display = displayStyle;
 
@@ -111,14 +118,14 @@ const singleItem = (mobileId) => {
 // single item show display
 
 const singleItemClick = (singleData) => {
-    //single data display hide
-    singlePageDataClear('none');
-    //spinner data display show
-    spinnerToggle("flex");
-    // single data load
-    singleItem(singleData)
-}
-// data .data convert a function
+        //single data display hide
+        singlePageDataClear('none');
+        //spinner data display show
+        spinnerToggle("flex");
+        // single data load
+        singleItem(singleData)
+    }
+    // data .data convert a function
 
 
 // show single in modals
@@ -136,13 +143,13 @@ const showSingleItem = (data) => {
                     <div class="card border-0 rounded-0 py-4">
                         <div class="row align-items-center">
                             <div class="col-md-6">
-                                <img src="${data?.data?.image?data?.data?.image:'img/mobile.jpg'} " class="card-img-top px-5 py-3" height="400" alt="${data?.data?.name?data?.data?.name:'no found'}">
+                                <img src="${data?.data?.image?data?.data?.image:'img/mobile.jpg'} " class="card-img-top px-5 py-3 img-fluid" height="" alt="${data?.data?.name?data?.data?.name:'no found'}">
                             </div>
                             <div class="col-md-6">
                                 <ul class="list-group list-group-flush">
                                     <h2 class="card-title fw-bold  mx-3">${data?.data?.name?data?.data?.name:'no found'}</h2>
-                                    <li class="list-group-item"><strong>Brand : </strong> ${data?.data?.brand?data?.data?.brand:'no found'}</li>      
                                     <li class="list-group-item">${data.data.releaseDate?data?.data?.releaseDate:'Released ....'}</li>
+                                    <li class="list-group-item"><strong>Brand : </strong> ${data?.data?.brand?data?.data?.brand:'no found'}</li>                                   
                                     <li class="list-group-item"><strong>DisplaySize : </strong> ${data?.data?.mainFeatures?.displaySize?data?.data?.mainFeatures?.displaySize:'no found'}</li>   
                                     <li class="list-group-item border-bottom"><strong>Memory : </strong> ${data?.data?.mainFeatures.memory?data?.data?.mainFeatures?.memory:'no found'}</li>        
                                 </ul>
@@ -163,7 +170,7 @@ const showSingleItem = (data) => {
                     </div>
                 </div>
             `
-    // spinner data display hide
+        // spinner data display hide
     spinnerToggle("none");
     // spinner data display show
     singlePageDataClear('block');
