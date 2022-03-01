@@ -20,12 +20,16 @@ const mobileApiLoad = (inputData) => {
 
 // search button and input field  event handel add 
 const searchBtn = () => {
+    // sinner display show
     spinnerToggle("flex");
+    // search result display hide
+    displayDataToggle('none');
+
     const inputField = document.getElementById('search-input');
     const inputValue = inputField.value;
     if (inputValue == "") {
         document.getElementById('items-number').innerText = `OOps!! 😭😭 Please input any Mobile name or Model...`;
-        // spinner
+        // sinner display none
         spinnerToggle("none");
 
     } else {
@@ -70,7 +74,10 @@ const mobileDataDisplay = (data) => {
             </div>
         `
         displayItems.appendChild(div);
+        // spinner display hide
         spinnerToggle("none");
+        // search result display show
+        displayDataToggle('flex');
     })
 }
 
@@ -78,6 +85,15 @@ const mobileDataDisplay = (data) => {
 // spinner page toggler add
 const spinnerToggle = (displayStyle) => {
     document.getElementById('spinner').style.display = displayStyle;
+}
+//search result toggle and previous data clear
+const displayDataToggle = (displayStyle) => {
+    document.getElementById('display-items').style.display = displayStyle;
+}
+// single page data toggle 
+const singlePageDataClear = (displayStyle) => {
+    document.getElementById('single-view').style.display = displayStyle;
+
 }
 
 
@@ -103,7 +119,11 @@ const singleItem = (mobileId) => {
 // single item show display
 
 const singleItemClick = (singleData) => {
+    //single data display hide
+    singlePageDataClear('none');
+    //spinner data display show
     spinnerToggle("flex");
+    // single data load
     singleItem(singleData)
 }
 // data .data convert a function
@@ -151,7 +171,10 @@ const showSingleItem = (data) => {
                     </div>
                 </div>
             `
+    // spinner data display hide
     spinnerToggle("none");
+    // spinner data display show
+    singlePageDataClear('block');
 }
 
 
