@@ -1,7 +1,7 @@
 const fetchData = (urlLink, loadData) => {
     //api link
     const url = `https://openapi.programming-hero.com/api/${urlLink}`
-        // fetch function called
+    // fetch function called
     fetch(url)
         .then((res) => {
             // condition apply
@@ -31,6 +31,11 @@ const fetchData = (urlLink, loadData) => {
 const mobileApiLoad = (inputData) => {
     fetchData(`phones?search=${inputData}`, mobileDataDisplay);
 }
+window.addEventListener('load', () => {
+    fetchData(`phones?search=a`, mobileDataDisplay);
+});
+
+
 
 
 
@@ -131,13 +136,13 @@ const mobileDataDisplay = (data) => {
 
 // spinner page toggler add
 const spinnerToggle = (displayStyle) => {
-        document.getElementById('spinner').style.display = displayStyle;
-    }
-    //search result toggle and previous data clear
+    document.getElementById('spinner').style.display = displayStyle;
+}
+//search result toggle and previous data clear
 const displayDataToggle = (displayStyle) => {
-        document.getElementById('display-items').style.display = displayStyle;
-    }
-    // single page data toggle 
+    document.getElementById('display-items').style.display = displayStyle;
+}
+// single page data toggle 
 const singlePageDataClear = (displayStyle) => {
     document.getElementById('single-view').style.display = displayStyle;
 
@@ -156,14 +161,14 @@ const singleItem = (mobileId) => {
 // single item show display
 
 const singleItemClick = (singleData) => {
-        //single data display hide
-        singlePageDataClear('none');
-        //spinner data display show
-        spinnerToggle("flex");
-        // single data load
-        singleItem(singleData);
-    }
-    // data .data convert a function
+    //single data display hide
+    singlePageDataClear('none');
+    //spinner data display show
+    spinnerToggle("flex");
+    // single data load
+    singleItem(singleData);
+}
+// data .data convert a function
 
 
 
@@ -210,7 +215,7 @@ const showSingleItem = (data) => {
                     </div>
                 </div>
             `
-        // spinner data display hide
+    // spinner data display hide
     spinnerToggle("none");
     // spinner data display show
     singlePageDataClear('block');
