@@ -36,8 +36,17 @@ window.addEventListener('load', () => {
 });
 
 
-
-
+// search enter keyLoad
+const enterKey = () => {
+    const searchBtn = document.getElementById('search-btn');
+    const searchInput = document.getElementById('search-input');
+    searchInput.addEventListener('keypress', (e) => {
+        if (e.key === "Enter") {
+            searchBtn.click();
+        }
+    })
+}
+enterKey()
 
 // search button and input field  event handel add 
 const searchBtn = () => {
